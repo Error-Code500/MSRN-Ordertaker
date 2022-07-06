@@ -1,0 +1,37 @@
+const background_01 = require("../assets/images/background_01.png")
+const background_02 = require("../assets/images/background_02.png")
+const favourite_food = require("../assets/images/favourite_food.png")
+const great_food = require("../assets/images/great_food.png")
+const hot_delivery = require("../assets/images/hot_delivery.png")
+const logo_01 = require("../assets/images/logo_01.png")
+const logo_02 = require("../assets/images/logo_02.png")
+const alayonLogo1 = require("../assets/images/alayonLogo1.png")
+const profile = require("../assets/images/profile.png")
+const Background_RoundHeaded = require("../assets/images/Background_RoundHeaded.png")
+const AlayonLogo = require("../assets/images/AlayonLogo.png")
+
+
+// added images
+const credit_card = require("../assets/images/credit_card.png")
+const place_order = require("../assets/images/place_order.png")
+const recent_order = require("../assets/images/recent_order.png")
+const syncronize = require("../assets/images/syncronize.png")
+
+
+export default {
+    background_01,
+    background_02,
+    favourite_food,
+    great_food,
+    hot_delivery,
+    logo_01,
+    logo_02,
+    alayonLogo1,    
+    profile,
+    Background_RoundHeaded,
+    AlayonLogo,
+    credit_card,
+    place_order,
+    recent_order,
+    syncronize
+}
