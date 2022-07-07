@@ -1,9 +1,12 @@
-import { StyleSheet, TouchableOpacity, View, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Image, Animated } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 import Svg, { G, Circle } from 'react-native-svg';
-import Ionicon from 'react-native-ionicons';
 // import AntDesign from "antd";
-export default NextButton = () => {
+import {
+    constants, icons, images
+} from "../constants";
+
+export default NextButton = ({ percentage, scrollTo }) => {
     
     const size = 128;
     const strokeWidth = 2;
@@ -11,23 +14,68 @@ export default NextButton = () => {
     const radius = size / 2 - strokeWidth / 2; 
     const circumference = 2 * Math.PI * radius;
 
+    
+    const progressAnimation = useRef(new Animated.Value(0)).current;
+    progressRef = useRef(null);
+    
+    const animation = (toValue) => {
+         return Animated.timing(progressAnimation, {
+            toValue,
+            duration: 250,
+            useNativeDriver: true
+
+         }).start()
+    };
+
+    useEffect(() => {
+        animation(percentage);
+    }, [percentage]);
+
+    useEffect(() => {
+        progressAnimation.addListener((value) => {
+                const strokeDashoffset = circumference - (circumference * value.value) / 100;
+
+                if (progressRef?.current) {
+                    progressRef.current.setNativeProps({
+                        strokeDashoffset,
+                    });
+                }
+            },
+            [percentage]
+        );
+        
+        return () => {
+            progressAnimation.removeAllListeners()
+        };
+    },[]);
+    
+
+
+
   return (
     <View style={styles.container}>
         <Svg width={size} height={size}>
             <G rotation="-90" origin={center}>
                 <Circle strok="#E6E7E8" cx={center} cy={center} r={radius} strokeWidth={strokeWidth} />
                     <Circle 
+                        ref={progressRef}
                         stroke="#F4338F"
                         cx={center}
                         cy={center}
                         r={radius}
                         strokeWidth={strokeWidth}
                         strokeDasharray={circumference}
-                        strokeDashoffset={circumference - ( circumference * 25 ) / 100 }/>
+                        />
             </G>
         </Svg>
-        <TouchableOpacity style={styles.button} activeOpacity={0.6}>
-            <Image source={'file:///C:/Users/alby/Downloads/ionicons.designerpack/arrow-forward.svg'}/>
+        <TouchableOpacity onPress={scrollTo} style={styles.button} activeOpacity={0.6}>
+            <Image  
+                style={{
+                    height: 79,
+                    width: 79,
+                    justifyContent: 'center',
+                }}
+                source={images.arrow}/> 
         </TouchableOpacity>
     </View>
   );
@@ -41,7 +89,7 @@ const styles = StyleSheet.create({
     },
     button: {
         position: 'absolute',
-        backgroundColor: '#f4338f',
+        backgroundColor: '#f4338f99',
         borderRadius: 100,
         padding: 20,
     },

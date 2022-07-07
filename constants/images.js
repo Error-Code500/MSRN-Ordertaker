@@ -14,11 +14,12 @@ const AlayonLogo = require("../assets/images/AlayonLogo.png")
 // added images
 const credit_card = require("../assets/images/credit_card.png")
 const place_order = require("../assets/images/place_order.png")
-const recent_order = require("../assets/images/recent_order.png")
+const recent_orders = require("../assets/images/recent_orders.png")
 const syncronize = require("../assets/images/syncronize.png")
-
+const arrow = require("../assets/icons/arrow.png")
 
 export default {
+    arrow,
     background_01,
     background_02,
     favourite_food,
@@ -32,6 +33,7 @@ export default {
     AlayonLogo,
     credit_card,
     place_order,
-    recent_order,
-    syncronize
+    syncronize,
+    recent_orders,
+    arrow
 }
